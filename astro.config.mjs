@@ -4,12 +4,14 @@ import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import vercel from '@astrojs/vercel/serverless';
+import vercelEdge from '@astrojs/vercel/edge';
 
 import { remarkReadingTime } from "./src/utils/all";
 
 export default defineConfig({
   site: "https://stablo-astro.web3templates.com",
+  output: 'server',
+  adapter: vercelEdge(),
   experimental: {
     contentCollections: true,
   },
@@ -26,6 +28,4 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
-  output: 'server',
-  adapter: vercel(),
 });
