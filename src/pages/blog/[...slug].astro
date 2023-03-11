@@ -16,14 +16,12 @@ export async function getStaticPaths() {
   }));
 }
 
-const { post } = Astro.props;
+// const { post } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = await post.render();
-
-
+// const { Content, remarkPluginFrontmatter } = await post.render();
 ---
 
-<Layout
+<!-- <Layout
   title={post.data.title}
   desc={post.data.excerpt}
   ogimage={post.data.image}>
@@ -36,17 +34,17 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 
       <div class="flex justify-center mt-3 space-x-3 text-gray-500">
         <div class="flex items-center gap-3">
-            <div class="flex items-center space-x-2 text-sm">
-              <time
-                class="text-gray-500 dark:text-gray-400"
-                datetime={post.data.publishDate}>
-                {getFormattedDate(post.data.publishDate)}
-              </time>
-              <span>
-                · {Math.round(remarkPluginFrontmatter?.estReadingTime) || "5"} min
-                read
-              </span>
-            </div>
+          <div class="flex items-center space-x-2 text-sm">
+            <time
+              class="text-gray-500 dark:text-gray-400"
+              datetime={post.data.publishDate}>
+              {getFormattedDate(post.data.publishDate)}
+            </time>
+            <span>
+              · {Math.round(remarkPluginFrontmatter?.estReadingTime) || "5"} min
+              read
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +73,17 @@ const { Content, remarkPluginFrontmatter } = await post.render();
     <article class="max-w-screen-md mx-auto">
       <div
         class="mx-auto my-3 prose prose-base dark:prose-invert prose-a:text-blue-600">
-        <Content />
+        {Content && <Content />}
+      </div>
+    </article>
+  </Container>
+</Layout> -->
+<Layout>
+  <Container>
+    <article class="max-w-screen-md mx-auto">
+      <div
+        class="mx-auto my-3 prose prose-base dark:prose-invert prose-a:text-blue-600">
+        hello
       </div>
     </article>
   </Container>
