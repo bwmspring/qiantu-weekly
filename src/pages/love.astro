@@ -1,0 +1,14 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import Pagetitle from "@components/Pagetitle.astro";
+---
+
+<Layout title="关注我们">
+  <Container>
+    <Pagetitle>
+      <Fragment slot="title">About</Fragment>
+      <Fragment slot="desc">Hello!</Fragment>
+    </Pagetitle>
+  </Container>
+</Layout>
