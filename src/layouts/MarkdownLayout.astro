@@ -1,0 +1,58 @@
+---
+import { getIndex } from "@utils/all";
+import Layout from "./Layout.astro";
+
+export interface Props {}
+
+const pageUrl = new URL(Astro.request.url);
+const currentPage = pageUrl.pathname;
+
+
+const currentUrl =  currentPage;
+
+// 或者下一篇文章
+const allPosts = (await Astro.glob("../pages/post/*.md")).sort(
+  (a: any, b: any) =>
+    new Date(b.data?.publishDate).valueOf() -
+    new Date(a.data?.publishDate).valueOf()
+);
+
+const postIndex = getIndex(currentPage);
+let nextUrl = '';
+if (postIndex > 2) {
+  nextUrl = allPosts[allPosts.length - postIndex + 1].url;
+}
+let prevUrl = '';
+if (postIndex < allPosts.length) {
+  prevUrl = allPosts[allPosts.length - postIndex - 1].url;
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
+    <h2
+      class="font-bold font-heading text-2xl md:text-3xl leading-tighter tracking-tighter">
+      {frontmatter.title}
+    </h2>
+    <div
+      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 mb-12">
+      <slot />
+    </div>
+    <hr />
+    <div class="flex justify-between md:flex-row flex-col mt-2 post-footer">
+      <div class="text-gray-800 flex-1">
+        发布日期：<a
+          target="_blank"
+          title="Edit">{frontmatter.publishDate}</a
+        >
+      </div>
+      <div class="md:mt-0 mt-4 flex-1 text-right">
+        {nextUrl ? <a href={nextUrl}>下一篇 |</a> : null}
+        {prevUrl ? <a href={prevUrl}>上一篇 |</a> : null}
+        <a href="/">去首页</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -12,8 +12,8 @@ const menus: Menu[] = [
     href: "/",
   },
   {
-    label: "关注我们",
-    href: "/love",
+    label: "联系我们",
+    href: "/contact",
   },
 ];
 
@@ -27,8 +27,7 @@ const mobilemenu: Menu[] = [...menus];
         <a class="flex items-center mt-2" href="/">
           <span
             class="text-2xl text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600"
-            >前途</span
-          >
+            >前途</span>
           <span class="text-2xl text-slate font-extrabold mr-1">周刊</span>
         </a>
 
@@ -62,7 +61,7 @@ const mobilemenu: Menu[] = [...menus];
           menus.map((item) => (
             <a
               href={item.href}
-              class="px-5 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500">
+              class="px-5 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500">
               {item.label}
             </a>
           ))

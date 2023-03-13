@@ -2,10 +2,10 @@
 import cx from "classnames";
 
 import { Picture } from "@astrojs/image/components";
-import { getFormattedDate } from "@utils/all";
 import { Icon } from "astro-icon";
 
 const { post, aspect, preloadImage } = Astro.props;
+const { image, excerpt, title, publishDate } = post.frontmatter;
 ---
 
 <div class="cursor-pointer group">
@@ -14,11 +14,11 @@ const { post, aspect, preloadImage } = Astro.props;
       "relative overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800   hover:scale-105",
       aspect === "landscape" ? "aspect-video" : "aspect-square"
     )}>
-    <a href={"/blog/" + post.slug}>
+    <a href={post.url}>
       {
-        post.data.image ? (
+        image ? (
           <Picture
-            src={post.data.image}
+            src={image}
             widths={[200, 400, 800]}
             sizes="(max-width: 640px) 90vw, 480px"
             aspectRatio={aspect === "landscape" ? "16:9" : "1:1"}
@@ -40,19 +40,19 @@ const { post, aspect, preloadImage } = Astro.props;
 
   <h2
     class="mt-2 text-lg font-semibold tracking-normal text-brand-primary dark:text-white">
-    <a href={"/blog/" + post.slug}>
+    <a href={post.url}>
       <span
         class="bg-gradient-to-r from-green-200 to-green-100 dark:from-purple-800 dark:to-purple-900 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]">
-        {post.data.title}
+        {title}
       </span>
     </a>
   </h2>
 
   <div class="hidden">
     {
-      post.data.excerpt && (
+      excerpt && (
         <p class="mt-2 text-sm text-gray-500 dark:text-gray-400 line-clamp-3">
-          <a href={"/blog/" + post.blog}>{post.data.excerpt}</a>
+          <a href={post.url}>{excerpt}</a>
         </p>
       )
     }
@@ -60,8 +60,8 @@ const { post, aspect, preloadImage } = Astro.props;
 
   <div
     class="flex items-center mt-3 space-x-3 text-gray-500 dark:text-gray-400">
-    <time class="text-sm" datetime={post.data.publishDate}>
-      {getFormattedDate(post.data.publishDate)}
+    <time class="text-sm" datetime={publishDate}>
+      {publishDate}
     </time>
   </div>
 </div>

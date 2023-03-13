@@ -1,17 +1,7 @@
 import getReadingTime from "reading-time";
 import { toString } from "mdast-util-to-string";
 
-/** Format Date */
-export const getFormattedDate = (date) =>
-  date
-    ? new Date(date).toLocaleDateString("en-us", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    : "";
 
-/** Estimated Reading time */
 export function remarkReadingTime() {
   return function (tree, { data }) {
     const textOnPage = toString(tree);
@@ -21,7 +11,7 @@ export function remarkReadingTime() {
   };
 }
 
-/** Check if an Image Path is Relative or Absolute */
+
 export const checkImageUrl = (image, url) => {
   try {
     new URL(image);
@@ -30,3 +20,9 @@ export const checkImageUrl = (image, url) => {
     return new URL(image, url).toString();
   }
 };
+
+//获取当前文章的序号
+export const getIndex = (currentPage) => {
+  const oldTitle = decodeURIComponent(currentPage.split('/post/')[1]);
+  return parseInt(oldTitle.split('-')[0])
+}
