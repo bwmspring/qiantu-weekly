@@ -21,7 +21,7 @@ export const checkImageUrl = (image, url) => {
   }
 };
 
-//获取当前文章的序号
+// 获取当前文章的序号
 export const getIndex = (currentPage) => {
   const oldTitle = decodeURIComponent(currentPage.split('/post/')[1]);
   return parseInt(oldTitle.split('-')[0])
