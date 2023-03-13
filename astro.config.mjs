@@ -5,7 +5,7 @@ import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import vercel from '@astrojs/vercel/serverless';
-import netlify from '@astrojs/netlify/edge-functions';
+import netlify from '@astrojs/netlify/functions';
 
 import { remarkReadingTime } from "./src/utils/all";
 
