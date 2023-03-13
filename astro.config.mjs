@@ -13,8 +13,8 @@ export default defineConfig({
   site: "https://stablo-astro.web3templates.com",
   // output: 'server',
   // adapter: vercel(),
-  output: 'server',
-  adapter: netlify(),
+  // output: 'server',
+  // adapter: netlify(),
   experimental: {
     contentCollections: true,
   },
