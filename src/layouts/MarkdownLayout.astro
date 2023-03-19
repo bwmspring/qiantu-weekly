@@ -2,29 +2,30 @@
 import { getIndex } from "@utils/all";
 import Layout from "./Layout.astro";
 
-export interface Props {}
+export interface Props {
+  frontmatter: { title: string; excerpt: string; publishDate: any; image: string; draft: boolean };
+}
 
 const pageUrl = new URL(Astro.request.url);
 const currentPage = pageUrl.pathname;
 
-
-const currentUrl =  currentPage;
-
 // 或者下一篇文章
-const allPosts = (await Astro.glob("../pages/post/*.md")).sort(
-  (a: any, b: any) =>
-    new Date(b.data?.publishDate).valueOf() -
-    new Date(a.data?.publishDate).valueOf()
-);
+const allPosts = (await Astro.glob("../pages/post/*.md"))
+  .filter((e: any) => !e.frontmatter.draft)
+  .sort(
+    (a: any, b: any) =>
+      new Date(b.frontmatter.publishDate).valueOf() -
+      new Date(a.frontmatter.publishDate).valueOf()
+  );
 
 const postIndex = getIndex(currentPage);
-let nextUrl = '';
+let nextUrl = "";
 if (postIndex > 2) {
-  nextUrl = allPosts[allPosts.length - postIndex + 1].url;
+  nextUrl = allPosts[allPosts.length - postIndex + 1].url || "";
 }
-let prevUrl = '';
+let prevUrl = "";
 if (postIndex < allPosts.length) {
-  prevUrl = allPosts[allPosts.length - postIndex - 1].url;
+  prevUrl = allPosts[allPosts.length - postIndex - 1].url || "";
 }
 
 const { frontmatter } = Astro.props;
@@ -43,10 +44,7 @@ const { frontmatter } = Astro.props;
     <hr />
     <div class="flex justify-between md:flex-row flex-col mt-2 post-footer">
       <div class="text-gray-800 flex-1">
-        发布日期：<a
-          target="_blank"
-          title="Edit">{frontmatter.publishDate}</a
-        >
+        发布日期：<a target="_blank" title="Edit">{frontmatter.publishDate}</a>
       </div>
       <div class="md:mt-0 mt-4 flex-1 text-right">
         {nextUrl ? <a href={nextUrl}>下一篇 |</a> : null}
