@@ -1,4 +1,6 @@
 ---
+import AstroLogo from "./AstroLogo.astro";
+
 interface Menu {
   label: string;
   href: string;
@@ -10,10 +12,12 @@ const menus: Menu[] = [
   {
     label: "首页",
     href: "/",
+    external: false,
   },
   {
-    label: "联系我们",
-    href: "/contact",
+    label: "GitHub",
+    href: "https://github.com/bwmspring",
+    external: true,
   },
 ];
 
@@ -24,10 +28,14 @@ const mobilemenu: Menu[] = [...menus];
   <nav>
     <div class="flex flex-wrap justify-between md:gap-10 md:flex-nowrap">
       <div class="flex items-center justify-between w-full md:w-auto">
+        <a href="/" class="logo-image">
+          <AstroLogo size={40} />
+        </a>
         <a class="flex items-center mt-2" href="/">
           <span
             class="text-2xl text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600"
-            >前途</span>
+            >前途</span
+          >
           <span class="text-2xl text-slate font-extrabold mr-1">周刊</span>
         </a>
 
@@ -61,7 +69,8 @@ const mobilemenu: Menu[] = [...menus];
           menus.map((item) => (
             <a
               href={item.href}
-              class="px-5 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500">
+              target={item.external ? "_blank" : ""}
+              class="px-5 py-2 text-xl font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500">
               {item.label}
             </a>
           ))
