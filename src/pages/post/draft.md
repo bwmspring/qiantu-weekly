@@ -17,3 +17,5 @@ draft: true
 The unexamined life is not worth living.
 
 —— 苏格拉底
+
+https://nieyong.github.io/wiki_ny/%E8%BF%B7%E6%97%B6%E5%B8%88%E5%BA%A6%20%E6%82%9F%E4%BA%86%E8%87%AA%E5%BA%A6.html
